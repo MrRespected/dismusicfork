@@ -1,8 +1,6 @@
 import asyncio
 import math
-
-from discord import (Color, Embed, Forbidden, HTTPException, InvalidArgument,
-                     NotFound)
+import discord
 
 from ._classes import Emojis, Loop
 
@@ -25,7 +23,7 @@ class Paginator:
         return length
 
     def create_embed(self, tracks, current_page, total_pages):
-        embed = Embed(color=Color(0x2F3136))
+        embed = discord.Embed(color=discord.Color(0x2F3136))
         embed.set_author(
             name="Queue",
             icon_url="https://cdn.discordapp.com/attachments/776345413132877854/940247400046542948/list.png",
@@ -83,7 +81,7 @@ class Paginator:
                     await msg.add_reaction(Emojis.PREV)
                     await msg.add_reaction(Emojis.NEXT)
                     await msg.add_reaction(Emojis.LAST)
-                except (HTTPException, Forbidden, NotFound, InvalidArgument) as e:
+                except (discord.HTTPException, discord.Forbidden, discord.NotFound, discord.TypeError) as e:
                     print(e)
                     pass
             else:
